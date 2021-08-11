@@ -25,7 +25,7 @@ Extension Manager.
 
 Get the code from git:
 
-    gitclone https://github.com/aaw-team/verowa.git
+    git clone https://github.com/aaw-team/verowa.git
 
 ## Documentation
 
