@@ -95,7 +95,7 @@ class Client implements LoggerAwareInterface
     {
         $requestURI = $this->buildApiFunctionRequestUri($function);
         foreach ($parameters as $parameterValue) {
-            $requestURI .= '/' . urlencode($parameterValue);
+            $requestURI .= '/' . urlencode((string)$parameterValue);
         }
 
         try {
