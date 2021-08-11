@@ -1,0 +1,20 @@
+plugin.tx_verowa {
+    view {
+        templateRootPaths {
+            0 = EXT:verowa/Resources/Private/Templates
+            10 = {$plugin.tx_verowa.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:verowa/Resources/Private/Partials
+            10 = {$plugin.tx_verowa.view.partialRootPath}
+        }
+    }
+    settings {
+        pagination {
+            itemsPerPage = 20
+            insertAbove = 0
+            insertBelow = 1
+            maximumNumberOfLinks = 10
+        }
+    }
+}

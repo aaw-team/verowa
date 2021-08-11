@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  AawTeam\Verowa\:
+    resource: '../Classes/*'
+
+  AawTeam\Verowa\Command\ImportCommand:
+    tags:
+      - name: 'console.command'
+        command: 'verowa:import'

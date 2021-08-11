@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file source-language="en" datatype="plaintext" original="messages" date="2021-08-11T12:46:55Z" product-name="verowa">
+        <header/>
+        <body>
+            <!-- sysmessages -->
+            <trans-unit id="sysmessage.error.title">
+                <source>Error</source>
+                <target>Fehler</target>
+            </trans-unit>
+            <trans-unit id="sysmessage.error.noeventrecords">
+                <source>No events found.</source>
+                <target>Keine Veranstaltungen gefunden.</target>
+            </trans-unit>
+
+            <!-- paginator -->
+            <trans-unit id="paginator.labels.first">
+                <source>First</source>
+                <target>Erste</target>
+            </trans-unit>
+            <trans-unit id="paginator.labels.previous">
+                <source>Previous</source>
+                <target>Vorherige</target>
+            </trans-unit>
+            <trans-unit id="paginator.labels.next">
+                <source>Next</source>
+                <target>Nächste</target>
+            </trans-unit>
+            <trans-unit id="paginator.labels.last">
+                <source>Last</source>
+                <target>Letzte</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

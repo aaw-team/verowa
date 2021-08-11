@@ -1,0 +1,6 @@
+plugin.tx_verowa.view {
+    // cat=plugin.tx_verowa/templates/b1; type=string; label=Fluid templates path
+    templateRootPath =
+    // cat=plugin.tx_verowa/templates/b1; type=string; label=Fluid partials path
+    partialRootPath =
+}

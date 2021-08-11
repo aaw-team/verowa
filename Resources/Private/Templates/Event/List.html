@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/AawTeam/Verowa/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="verowa-event-list">
+    <f:if condition="{events -> f:count()} > 0">
+        <f:then>
+            <f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{itemsPerPage: settings.pagination.itemsPerPage, insertAbove: settings.pagination.insertAbove, insertBelow: settings.pagination.insertBelow, maximumNumberOfLinks: settings.pagination.maximumNumberOfLinks}">
+                <f:for each="{paginatedEvents}" as="event">
+                    <f:render partial="Event/List/Item" arguments="{event:event}" />
+                </f:for>
+            </f:widget.paginate>
+        </f:then>
+        <f:else>
+            <div class="error-message">
+                <h3><f:translate key="sysmessage.error.title" /></h3>
+                <p><f:translate key="sysmessage.error.noeventrecords" /></p>
+            </div>
+        </f:else>
+    </f:if>
+</div>
+
+</html>

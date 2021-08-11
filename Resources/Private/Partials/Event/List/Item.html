@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/AawTeam/Verowa/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="event grid-x grid-margin-x" itemscope itemtype="https://schema.org/Event">
+    <div class="cell small-3 text-center" itemprop="startDate" content="{event.dateFrom -> f:format.date(format:'c')}">
+        <p class="h5"><f:format.date format="%A">{event.dateFrom}</f:format.date></p>
+        <p class="h2"><f:format.date format="d">{event.dateFrom}</f:format.date></p>
+        <p class="h5"><f:format.date format="%B">{event.dateFrom}</f:format.date></p>
+    </div>
+    <div class="cell small-9">
+        <h3 itemprop="name">{event.title}</h3>
+        <div class="event-data">
+            <small itemprop="endDate" content="{event.dateTo -> f:format.date(format:'c')}"><v:format.fromToDate from="{event.dateFrom}" to="{event.dateTo}" hideTime="{event.hideTime}"/></small>
+            <f:if condition="{event.rooms -> f:count()} > 0">
+                <br><small itemprop="location">{event.rooms.0.roomName}</small>
+            </f:if>
+        </div>
+        <div itemprop="description">
+            <f:format.html>{event.shortDesc}</f:format.html>
+            <f:format.html>{event.longDesc}</f:format.html>
+        </div>
+    </div>
+</div>
