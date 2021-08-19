@@ -17,8 +17,8 @@
             </f:if>
         </div>
         <div itemprop="description">
-            <f:format.html>{event.shortDesc}</f:format.html>
-            <f:format.html>{event.longDesc}</f:format.html>
+            <f:sanitize.html>{event.shortDesc}</f:sanitize.html>
+            <f:sanitize.html>{event.longDesc}</f:sanitize.html>
         </div>
     </div>
 </div>
