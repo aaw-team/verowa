@@ -12,6 +12,7 @@ namespace AawTeam\Verowa\Controller;
 
 use AawTeam\Verowa\Domain\Repository\EventRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * EventController
@@ -33,6 +34,8 @@ class EventController extends ActionController
 
     protected function listAction()
     {
-        $this->view->assign('events', $this->eventRepository->findAll());
+        $query = $this->eventRepository->createQuery();
+        $query->setOrderings(['date_from' =>  QueryInterface::ORDER_ASCENDING]);
+        $this->view->assign('events', $query->execute());
     }
 }
