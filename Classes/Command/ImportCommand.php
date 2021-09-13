@@ -318,6 +318,36 @@ class ImportCommand extends Command
                 if (!empty($eventDetails['rooms'])) {
                     foreach ($eventDetails['rooms'] as $room) {
                         $sorting = 0;
+                        if (!isset($room['id']) || intval($room['id']) < 1) {
+                            // Create a 'temporary' room record for events, that do not specify a room.id (and seem therefor not to be present in /getrooms API call)
+                            $this->getDatabaseConnection()->insert(
+                                'tx_verowa_room',
+                                [
+                                    'pid' => $storagePid,
+                                    'tstamp' => $GLOBALS['EXEC_TIME'],
+                                    'room_name' => (string)$room['name'],
+                                    'location_name' => (string)$room['location_name'],
+                                    'location_url' => (string)$room['location_url'],
+                                    'location_url_is_external' => (bool)$room['location_url_is_external'],
+                                ],
+                                [
+                                    \PDO::PARAM_INT,
+                                    \PDO::PARAM_INT,
+                                    \PDO::PARAM_STR,
+                                    \PDO::PARAM_STR,
+                                    \PDO::PARAM_STR,
+                                    \PDO::PARAM_BOOL,
+                                ]
+                            );
+
+                            // Make up a room.id that doesn't exist, so it can be used afterwards to link event and room record
+                            $tmpRoomId = max($roomId2RoomUid) + 1;
+                            while (in_array($tmpRoomId, $roomId2RoomUid)) {
+                                $tmpRoomId++;
+                            }
+                            $room['id'] = $tmpRoomId;
+                            $roomId2RoomUid[$room['id']] = $this->getDatabaseConnection()->lastInsertId('tx_verowa_room', 'uid');
+                        }
                         $this->getDatabaseConnection()->insert(
                             'tx_verowa_event_room_mm',
                             [

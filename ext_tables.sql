@@ -37,7 +37,7 @@ CREATE TABLE tx_verowa_event (
 );
 
 CREATE TABLE tx_verowa_room (
-    room_id int(11) unsigned NOT NULL,
+    room_id int(11) unsigned,
     room_name varchar(255) NOT NULL DEFAULT '',
     shortcut varchar(40) NOT NULL DEFAULT '',
     location_id int(11) unsigned COMMENT '1:n => location.id',
