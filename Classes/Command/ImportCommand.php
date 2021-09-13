@@ -358,7 +358,7 @@ class ImportCommand extends Command
             $this->getDatabaseConnection()->rollBack();
             $output->writeln('An error occured while running import: ' . $e->getMessage(), OutputInterface::VERBOSITY_QUIET);
             $locker->release();
-            return Command::FAILURE;
+            throw $e;
         }
 
         // Release the lock
