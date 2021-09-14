@@ -15,8 +15,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Locking\LockFactory;
 use TYPO3\CMS\Core\Locking\LockingStrategyInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -68,6 +70,9 @@ class ImportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Make sure the _cli_ user is loaded
+        Bootstrap::initializeBackendAuthentication();
+
         // Input validation
         $instance = $input->getOption('instance');
         if (!is_string($instance) || empty($instance)) {
@@ -390,6 +395,12 @@ class ImportCommand extends Command
             $locker->release();
             throw $e;
         }
+
+        // Clear page cache of $storagePid
+        /** @var DataHandler $dataHandler */
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start([], []);
+        $dataHandler->clear_cacheCmd((string)$storagePid);
 
         // Release the lock
         $locker->release();
