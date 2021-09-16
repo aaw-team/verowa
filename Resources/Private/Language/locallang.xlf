@@ -24,6 +24,11 @@
             <trans-unit id="paginator.labels.last">
                 <source>Last</source>
             </trans-unit>
+
+            <!-- plugin event -->
+            <trans-unit id="plugin.event.label.icsdownloadlink">
+                <source>Export to calendar</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

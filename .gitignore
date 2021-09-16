@@ -1,2 +1,4 @@
 .Build
 composer.lock
+Resources/Private/PHP/IcalendarGenerator/vendor
+Resources/Private/PHP/IcalendarGenerator/composer.lock

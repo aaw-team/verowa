@@ -1,0 +1,11 @@
+{
+    "minimum-stability": "stable",
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "prepend-autoloader": false
+    },
+    "require": {
+        "spatie/icalendar-generator": "^1.0 || ^2.0"
+    }
+}

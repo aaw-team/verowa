@@ -30,6 +30,12 @@
                 <source>Last</source>
                 <target>Letzte</target>
             </trans-unit>
+
+            <!-- plugin event -->
+            <trans-unit id="plugin.event.label.icsdownloadlink">
+                <source>Export to calendar</source>
+                <target>Kalender-Export</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
