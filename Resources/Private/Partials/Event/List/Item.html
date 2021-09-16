@@ -10,6 +10,11 @@
     </div>
     <div class="cell small-9">
         <h3 itemprop="name">{event.title}</h3>
+        <f:if condition="{event.imageUrl}">
+            <div>
+                <img itemprop="image" src="{event.imageUrl}" alt="" width="{event.imageWidth}" height="{event.imageHeight}" />
+            </div>
+        </f:if>
         <div class="event-data">
             <small itemprop="endDate" content="{event.dateTo -> f:format.date(format:'c')}"><v:format.fromToDate from="{event.dateFrom}" to="{event.dateTo}" hideTime="{event.hideTime}"/></small>
             <f:if condition="{event.rooms -> f:count()} > 0">

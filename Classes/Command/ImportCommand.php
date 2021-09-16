@@ -252,8 +252,8 @@ class ImportCommand extends Command
                     // 'rooms' => 0,                                           // @todo
                     // 'files' => 0,                                           // @todo
                     'image_url' => (string)$event['image_url'],                // @todo
-                    // 'image_width' => 0,                                     // @todo
-                    // 'image_width' => 0,                                     // @todo
+                    'image_width' => (int)$eventDetails['image_width'] ?? 0,
+                    'image_height' => (int)$eventDetails['image_height'] ?? 0,
                 ];
                 $eventDataTypes = [
                     \PDO::PARAM_INT,
@@ -289,8 +289,8 @@ class ImportCommand extends Command
                     // \PDO::PARAM_INT,
                     // \PDO::PARAM_INT,
                     \PDO::PARAM_STR,
-                    // \PDO::PARAM_INT,
-                    // \PDO::PARAM_INT,
+                    \PDO::PARAM_INT,
+                    \PDO::PARAM_INT,
                 ];
 
                 $qb = $this->getDatabaseConnection()->createQueryBuilder();

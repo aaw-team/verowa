@@ -29,6 +29,8 @@ class Event extends AbstractEntity
     protected $longDesc;
     protected $subscribeDate;
     protected $imageUrl;
+    protected $imageWidth;
+    protected $imageHeight;
 
     /**
      * @var ObjectStorage<File>
@@ -174,5 +176,25 @@ class Event extends AbstractEntity
     public function setFiles(ObjectStorage $files)
     {
         $this->files = $files;
+    }
+
+    public function getImageWidth(): int
+    {
+        return $this->imageWidth;
+    }
+
+    public function setImageWidth(int $imageWidth)
+    {
+        $this->imageWidth = $imageWidth;
+    }
+
+    public function getImageHeight(): int
+    {
+        return $this->imageHeight;
+    }
+
+    public function setImageHeight(int $imageHeight)
+    {
+        $this->imageHeight = $imageHeight;
     }
 }
