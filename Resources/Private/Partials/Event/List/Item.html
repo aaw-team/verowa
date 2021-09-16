@@ -20,5 +20,16 @@
             <f:sanitize.html>{event.shortDesc}</f:sanitize.html>
             <f:sanitize.html>{event.longDesc}</f:sanitize.html>
         </div>
+        <f:if condition="{event.files -> f:count()} > 0">
+            <div class="event-files">
+                <f:for each="{event.files}" as="file">
+                    <div>
+                        <a target="_blank" href="{file.url}" class="event-file">
+                            <f:sanitize.html>{file.fileName}</f:sanitize.html> (<f:sanitize.html>{file.fileType}</f:sanitize.html>, <f:format.bytes decimals="1">{file.filesizeKb * 1000}</f:format.bytes>)
+                        </a>
+                    </div>
+                </f:for>
+            </div>
+        </f:if>
     </div>
 </div>

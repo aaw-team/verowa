@@ -16,4 +16,7 @@ return [
     \AawTeam\Verowa\Domain\Model\Room::class => [
         'tableName' => 'tx_verowa_room',
     ],
+    \AawTeam\Verowa\Domain\Model\File::class => [
+        'tableName' => 'tx_verowa_file',
+    ],
 ];

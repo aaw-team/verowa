@@ -13,6 +13,7 @@ defined('TYPO3_MODE') or die();
 $bootstrap = function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_verowa_event');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_verowa_room');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_verowa_file');
 };
 $bootstrap();
 unset($bootstrap);

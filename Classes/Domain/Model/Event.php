@@ -31,6 +31,11 @@ class Event extends AbstractEntity
     protected $imageUrl;
 
     /**
+     * @var ObjectStorage<File>
+     */
+    protected $files;
+
+    /**
      * @var ObjectStorage<Room>
      */
     protected $rooms;
@@ -38,6 +43,7 @@ class Event extends AbstractEntity
     public function initializeObject()
     {
         $this->rooms = new ObjectStorage();
+        $this->files = new ObjectStorage();
     }
 
     public function getEventId(): int
@@ -158,5 +164,15 @@ class Event extends AbstractEntity
     public function setRooms(ObjectStorage $rooms)
     {
         $this->rooms = $rooms;
+    }
+
+    public function getFiles(): ObjectStorage
+    {
+        return $this->files;
+    }
+
+    public function setFiles(ObjectStorage $files)
+    {
+        $this->files = $files;
     }
 }

@@ -190,12 +190,18 @@ class ImportCommand extends Command
                 $output->writeln('Room inserts: ' . $roomInserts . ' updates: ' . $roomUpdates . ' deletes: ' . $roomDeletions, OutputInterface::VERBOSITY_VERBOSE);
             }
 
-
-
+            // Remove all file records, they will be created during the event import
+            $qb = $this->getDatabaseConnection()->createQueryBuilder();
+            $qb->getRestrictions()->removeAll();
+            $fileDeletions = $qb->delete('tx_verowa_file')->from('tx_verowa_file')->where(
+                $qb->expr()->eq('pid', $qb->createNamedParameter($storagePid, \PDO::PARAM_INT))
+            )->execute();
+            $output->writeln('File deletes: ' . $fileDeletions, OutputInterface::VERBOSITY_VERBOSE);
 
             // Import events
             $allEventIds = [];
             $eventInserts = $eventUpdates = $eventDeletions = 0;
+            $fileInserts = 0;
             $eventId2EventUid = [];
             foreach ($apiClient->getEvents() as $event) {
                 $eventId = (int)$event['event_id'];
@@ -314,6 +320,33 @@ class ImportCommand extends Command
                     $eventId2EventUid[$eventId] = $this->getDatabaseConnection()->lastInsertId('tx_verowa_event');
                 }
 
+                // Add file records
+                foreach ($eventDetails['files'] as $file) {
+                    $fileInserts += $this->getDatabaseConnection()->insert(
+                        'tx_verowa_file',
+                        [
+                            'pid' => $storagePid,
+                            'tstamp' => $GLOBALS['EXEC_TIME'],
+                            'event' => $eventId2EventUid[$eventId],
+                            'file_name' => $file['file_name'],
+                            'desc' => $file['desc'],
+                            'url' => $file['url'],
+                            'filesize_kb' => $file['filesize_kb'],
+                            'file_type' => $file['file_type'],
+                        ],
+                        [
+                            \PDO::PARAM_INT,
+                            \PDO::PARAM_INT,
+                            \PDO::PARAM_INT,
+                            \PDO::PARAM_STR,
+                            \PDO::PARAM_STR,
+                            \PDO::PARAM_STR,
+                            \PDO::PARAM_INT,
+                            \PDO::PARAM_STR,
+                        ]
+                    );
+                }
+
                 // Add relations to room records
                 $qb = $this->getDatabaseConnection()->createQueryBuilder();
                 $qb->getRestrictions()->removeAll();
@@ -386,6 +419,7 @@ class ImportCommand extends Command
             $eventDeletions = $qb->execute();
 
             $output->writeln('Event inserts: ' . $eventInserts . ' updates: ' . $eventUpdates . ' deletes: ' . $eventDeletions, OutputInterface::VERBOSITY_VERBOSE);
+            $output->writeln('File inserts: ' . $fileInserts, OutputInterface::VERBOSITY_VERBOSE);
 
             // Commit transaction
             $this->getDatabaseConnection()->commit();

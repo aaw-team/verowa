@@ -232,7 +232,13 @@ return [
         'files' => [
             'label' => 'files',
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'inline',
+                'foreign_table' => 'tx_verowa_file',
+                'foreign_field' => 'event',
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                ],
             ],
         ],
         'image_url' => [

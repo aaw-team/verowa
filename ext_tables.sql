@@ -60,3 +60,12 @@ CREATE TABLE tx_verowa_event_room_mm (
     KEY uid_local (uid_local),
     KEY uid_foreign (uid_foreign)
 );
+
+CREATE TABLE tx_verowa_file (
+    event int(11) unsigned NOT NULL,
+    file_name varchar(255) NOT NULL,
+    desc mediumtext,
+    url varchar(1024),
+    filesize_kb int(11) unsigned,
+    file_type varchar(255),
+);
