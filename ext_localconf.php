@@ -13,7 +13,7 @@ defined('TYPO3_MODE') or die();
 $bootstrap = function () {
     // Register event plugin
     $controllerActions = [
-        \AawTeam\Verowa\Controller\EventController::class => 'list',
+        \AawTeam\Verowa\Controller\EventController::class => 'list, detail',
     ];
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Verowa',

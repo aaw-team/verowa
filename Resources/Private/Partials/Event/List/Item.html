@@ -1,41 +1,28 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:v="http://typo3.org/ns/AawTeam/Verowa/ViewHelpers"
       data-namespace-typo3-fluid="true">
-
-<div class="event grid-x grid-margin-x" itemscope itemtype="https://schema.org/Event">
+        
+<div class="event event-list-item grid-x grid-margin-x" itemscope itemtype="https://schema.org/Event">
     <div class="cell small-3 text-center" itemprop="startDate" content="{event.dateFrom -> f:format.date(format:'c')}">
         <p class="h5"><f:format.date format="%A">{event.dateFrom}</f:format.date></p>
         <p class="h2"><f:format.date format="d">{event.dateFrom}</f:format.date></p>
         <p class="h5"><f:format.date format="%B">{event.dateFrom}</f:format.date></p>
     </div>
     <div class="cell small-9">
-        <h3 itemprop="name">{event.title}</h3>
-        <f:if condition="{event.imageUrl}">
-            <div>
-                <img itemprop="image" src="{event.imageUrl}" alt="" width="{event.imageWidth}" height="{event.imageHeight}" />
+        <f:if condition="!{event.hideTime}">
+            <div class="event-time">
+                <f:translate key="plugin.event.list.time" arguments="{0: '{event.dateFrom -> f:format.date(format:\'H:i\')}'}" />
             </div>
         </f:if>
-        <div class="event-data">
-            <small itemprop="endDate" content="{event.dateTo -> f:format.date(format:'c')}"><v:format.fromToDate from="{event.dateFrom}" to="{event.dateTo}" hideTime="{event.hideTime}"/></small>
-            <f:if condition="{event.rooms -> f:count()} > 0">
-                <br><small itemprop="location">{event.rooms.0.roomName}</small>
-            </f:if>
-        </div>
-        <div itemprop="description">
-            <f:sanitize.html>{event.shortDesc}</f:sanitize.html>
-            <f:sanitize.html>{event.longDesc}</f:sanitize.html>
-        </div>
-        <f:if condition="{event.files -> f:count()} > 0">
-            <div class="event-files">
-                <f:for each="{event.files}" as="file">
-                    <div>
-                        <a target="_blank" href="{file.url}" class="event-file">
-                            <f:sanitize.html>{file.fileName}</f:sanitize.html> (<f:sanitize.html>{file.fileType}</f:sanitize.html>, <f:format.bytes decimals="1">{file.filesizeKb * 1000}</f:format.bytes>)
-                        </a>
-                    </div>
-                </f:for>
-            </div>
+        <h4 class="event-title" itemprop="name">{event.title}</h4>
+        <f:if condition="{event.rooms -> f:count()} > 0">
+            <div class="event-room" itemprop="location">{event.rooms.0.roomName}</div>
         </f:if>
+        <div>
+            <f:link.action action="detail" arguments="{event:event}" class="button">
+                <f:translate key="plugin.event.label.detaillink" />
+            </f:link.action>
+        </div>
         <div>
             <a href="{v:uri.icsDownload(event:event)}" class="event-ics-download"><f:translate key="plugin.event.label.icsdownloadlink" /></a>
         </div>

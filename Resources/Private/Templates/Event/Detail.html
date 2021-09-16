@@ -1,0 +1,44 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/AawTeam/Verowa/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="content">
+    <div class="verowa-event-detail event-detail event" itemscope itemtype="https://schema.org/Event">
+        <h1 itemprop="name">{event.title}</h1>
+        <f:if condition="{event.imageUrl}">
+            <div>
+                <img itemprop="image" src="{event.imageUrl}" alt="" width="{event.imageWidth}" height="{event.imageHeight}" />
+            </div>
+        </f:if>
+        <div itemprop="startDate" content="{event.dateFrom -> f:format.date(format:'c')}">
+            <f:format.date date="{event.dateFrom}" format="%A, %d. %B %Y"/><f:if condition="!{event.hideTime}">, <f:format.date date="{event.dateFrom}" format="H:i"/></f:if>
+        </div>
+        <f:if condition="{event.rooms -> f:count()} > 0">
+            <div class="event-room">
+                <f:translate key="plugin.event.detail.location" arguments="{0:event.rooms.0.roomName}" />
+            </div>
+        </f:if>
+        <div itemprop="description">
+            <f:sanitize.html>{event.shortDesc}</f:sanitize.html>
+            <f:sanitize.html>{event.longDesc}</f:sanitize.html>
+        </div>
+        <f:if condition="{event.files -> f:count()} > 0">
+            <div class="event-files">
+                <f:for each="{event.files}" as="file">
+                    <div>
+                        <a target="_blank" href="{file.url}" class="event-file">
+                            <f:sanitize.html>{file.fileName}</f:sanitize.html> (<f:sanitize.html>{file.fileType}</f:sanitize.html>, <f:format.bytes decimals="1">{file.filesizeKb * 1000}</f:format.bytes>)
+                        </a>
+                    </div>
+                </f:for>
+            </div>
+        </f:if>
+        <div>
+            <a href="{v:uri.icsDownload(event:event)}" class="event-ics-download"><f:translate key="plugin.event.label.icsdownloadlink" /></a>
+        </div>
+    </div>
+</f:section>
+
+</html>

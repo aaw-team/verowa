@@ -36,6 +36,18 @@
                 <source>Export to calendar</source>
                 <target>Kalender-Export</target>
             </trans-unit>
+            <trans-unit id="plugin.event.detail.location">
+                <source>Location: %s</source>
+                <target>Ort: %s</target>
+            </trans-unit>
+            <trans-unit id="plugin.event.label.detaillink">
+                <source>Details</source>
+                <target>Details</target>
+            </trans-unit>
+            <trans-unit id="plugin.event.list.time">
+                <source>At %s</source>
+                <target>%s Uhr</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

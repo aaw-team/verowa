@@ -29,6 +29,15 @@
             <trans-unit id="plugin.event.label.icsdownloadlink">
                 <source>Export to calendar</source>
             </trans-unit>
+            <trans-unit id="plugin.event.location">
+                <source>Location: %s</source>
+            </trans-unit>
+            <trans-unit id="plugin.event.label.detaillink">
+                <source>Details</source>
+            </trans-unit>
+            <trans-unit id="plugin.event.list.time">
+                <source>%s</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
