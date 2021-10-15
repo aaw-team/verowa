@@ -8,7 +8,7 @@
     <div class="verowa-event-detail event-detail event" itemscope itemtype="https://schema.org/Event">
         <h1 itemprop="name">{event.title}</h1>
         <f:if condition="{event.imageUrl}">
-            <div>
+            <div class="event-image">
                 <img itemprop="image" src="{event.imageUrl}" alt="" width="{event.imageWidth}" height="{event.imageHeight}" />
             </div>
         </f:if>
@@ -20,7 +20,7 @@
                 <f:translate key="plugin.event.detail.location" arguments="{0:event.rooms.0.roomName}" />
             </div>
         </f:if>
-        <div itemprop="description">
+        <div class="event-description" itemprop="description">
             <f:sanitize.html>{event.shortDesc}</f:sanitize.html>
             <f:sanitize.html>{event.longDesc}</f:sanitize.html>
         </div>
@@ -35,7 +35,7 @@
                 </f:for>
             </div>
         </f:if>
-        <div>
+        <div class="event-controls">
             <a href="{v:uri.icsDownload(event:event)}" class="event-ics-download"><f:translate key="plugin.event.label.icsdownloadlink" /></a>
         </div>
     </div>

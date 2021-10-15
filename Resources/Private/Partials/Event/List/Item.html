@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:v="http://typo3.org/ns/AawTeam/Verowa/ViewHelpers"
       data-namespace-typo3-fluid="true">
-        
+
 <div class="event event-list-item grid-x grid-margin-x" itemscope itemtype="https://schema.org/Event">
     <div class="cell small-3 text-center" itemprop="startDate" content="{event.dateFrom -> f:format.date(format:'c')}">
         <p class="h5"><f:format.date format="%A">{event.dateFrom}</f:format.date></p>
@@ -14,16 +14,14 @@
                 <f:translate key="plugin.event.list.time" arguments="{0: '{event.dateFrom -> f:format.date(format:\'H:i\')}'}" />
             </div>
         </f:if>
-        <h4 class="event-title" itemprop="name">{event.title}</h4>
+        <h3 class="event-title" itemprop="name">{event.title}</h3>
         <f:if condition="{event.rooms -> f:count()} > 0">
             <div class="event-room" itemprop="location">{event.rooms.0.roomName}</div>
         </f:if>
-        <div>
+        <div class="event-controls">
             <f:link.action action="detail" arguments="{event:event}" class="button">
                 <f:translate key="plugin.event.label.detaillink" />
             </f:link.action>
-        </div>
-        <div>
             <a href="{v:uri.icsDownload(event:event)}" class="event-ics-download"><f:translate key="plugin.event.label.icsdownloadlink" /></a>
         </div>
     </div>
